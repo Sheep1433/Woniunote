@@ -3,7 +3,7 @@ from module.article import Article
 import math
 
 admin = Blueprint("admin", __name__)
-
+pagesize = 10
 
 @admin.before_request
 def before_admin():
@@ -14,7 +14,6 @@ def before_admin():
 # 为系统管理首页填充文章列表，并绘制分页栏
 @admin.route('/admin')
 def sys_admin():
-    pagesize = 10
     article = Article()
     result = article.find_all_except_draft(0, pagesize)
     total = math.ceil(article.get_count_except_draft() / pagesize)
@@ -24,7 +23,6 @@ def sys_admin():
 # 为系统管理首页的文章列表进行分页查询
 @admin.route('/admin/article/<int:page>')
 def admin_article(page):
-    pagesize = 10
     start = (page - 1) * pagesize
     article = Article()
     result = article.find_all_except_draft(start, pagesize)
@@ -35,7 +33,6 @@ def admin_article(page):
 # 按照文章进行分类搜索的后台接口
 @admin.route('/admin/type/<int:type>-<int:page>')
 def admin_search_type(type, page):
-    pagesize = 10
     start = (page - 1) * pagesize
     result, total = Article().find_by_type_except_draft(start, pagesize, type)
     total = math.ceil(total / pagesize)

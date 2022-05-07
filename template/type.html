@@ -59,7 +59,11 @@
                 {% endif %}
 
                 {% for i in range(total) %}
-                <a href="/type/{{type}}-{{i+1}}">{{i+1}}</a>&nbsp;&nbsp;
+                {% if i == page-1 %}
+                <a href="/type/{{type}}-{{i+1}}", style="color:#f73131">{{i+1}}</a>&nbsp;&nbsp;
+                {% else %}
+                 <a href="/type/{{type}}-{{i+1}}">{{i+1}}</a>&nbsp;&nbsp;
+                {% endif %}
                 {% endfor %}
 
                 {% if page == total %}

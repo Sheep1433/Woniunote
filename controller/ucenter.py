@@ -26,3 +26,5 @@ def user_post():
 def user_article():
     result = Article().find_by_userid()
     return render_template('system-myarticle.html', result=result)
+
+
